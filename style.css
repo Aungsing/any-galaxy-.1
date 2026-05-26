@@ -1,0 +1,199 @@
+/* Core Layout Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #020208;
+    font-family: 'Courier New', Courier, monospace;
+    color: #e0e0ff;
+}
+
+/* Deep Space Ambient Nebula Gradient Overlay */
+.space-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at 50% 50%, #0d0c22 0%, #050515 60%, #010105 100%);
+    pointer-events: none;
+}
+
+/* Primary WebGL Core Viewport */
+#webgl-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: block;
+}
+
+/* Immersive Interactive HUD Layers */
+#hud {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none; /* Let all clicks pass right through directly to WebGL */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px;
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hud-header {
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 4px;
+    font-size: 0.85rem;
+    color: #4ef2d2;
+    text-shadow: 0 0 8px rgba(78, 242, 210, 0.6);
+}
+
+.hud-center {
+    text-align: center;
+    pointer-events: auto; /* Re-enable clicks on center text elements */
+}
+
+#level-name {
+    font-size: 2.8rem;
+    font-weight: 300;
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(78, 242, 210, 0.3);
+    margin-bottom: 12px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+}
+
+#instruction {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    color: #8a8ab0;
+    animation: breathingPulse 2.5s infinite ease-in-out;
+}
+
+.hud-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 320px;
+}
+
+.level-indicator {
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    color: #4ef2d2;
+    text-shadow: 0 0 8px rgba(78, 242, 210, 0.4);
+}
+
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+#progress-bar {
+    width: 14.28%; /* Starts filled proportionally for level 1 */
+    height: 100%;
+    background: linear-gradient(90deg, #3bd1b5, #4ef2d2);
+    box-shadow: 0 0 12px #4ef2d2;
+    transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* LEVEL 7 TERMINAL SCREEN INTERFACE */
+#finalScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background: #020206;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.final-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90vw;
+    max-height: 90vh;
+    gap: 30px;
+}
+
+.final-hud {
+    width: 100%;
+    border-bottom: 1px solid rgba(78, 242, 210, 0.25);
+    padding-bottom: 12px;
+    margin-bottom: 5px;
+}
+
+.revealed-image {
+    max-width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+    border: 1px solid rgba(78, 242, 210, 0.3);
+    box-shadow: 0 0 50px rgba(78, 242, 210, 0.15), 0 0 100px rgba(0, 0, 0, 0.9);
+    border-radius: 4px;
+    animation: imageGlowEntry 3s ease-out;
+}
+
+#reset-btn {
+    background: transparent;
+    border: 1px solid #4ef2d2;
+    color: #4ef2d2;
+    padding: 14px 35px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 15px rgba(78, 242, 210, 0.1);
+    border-radius: 2px;
+}
+
+#reset-btn:hover {
+    background: #4ef2d2;
+    color: #020206;
+    box-shadow: 0 0 25px rgba(78, 242, 210, 0.5);
+}
+
+/* Animations Logic */
+@keyframes breathingPulse {
+    0%, 100% { opacity: 0.35; transform: scale(0.99); }
+    50% { opacity: 0.95; transform: scale(1.01); }
+}
+
+@keyframes imageGlowEntry {
+    from { opacity: 0; filter: brightness(0.2) contrast(1.5); transform: scale(0.97); }
+    to { opacity: 1; filter: brightness(1) contrast(1); transform: scale(1); }
+}
+
+/* Responsive Adaptive Viewports */
+@media(max-width: 768px) {
+    #level-name { font-size: 1.8rem; letter-spacing: 6px; }
+    .hud-footer { width: 100%; }
+    #hud { padding: 20px; }
+    .hud-header { font-size: 0.7rem; letter-spacing: 2px; }
+}

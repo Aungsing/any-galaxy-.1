@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSMIC DEPTHS – 7 Level Galaxy Zoom System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <div class="space-bg"></div>
+
+    <canvas id="webgl-canvas"></canvas>
+
+    <div id="hud">
+        <div class="hud-header">
+            <span class="system-status">SYS_STATUS: ONLINE</span>
+            <span class="project-title">COSMIC DEPTHS // ENGINE v1.0.4</span>
+        </div>
+        
+        <div class="hud-center">
+            <h2 id="level-name">WIDE GALAXY VIEW</h2>
+            <p id="instruction">CLICK or SCROLL MOUSE to plunge deeper into space</p>
+        </div>
+
+        <div class="hud-footer">
+            <div class="level-indicator">
+                QUANTUM DEPTH: <span id="current-level-num">1</span> / 7
+            </div>
+            <div class="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="finalScreen" style="display:none;">
+        <div class="final-container">
+            <div class="hud-header final-hud">
+                <span>DEEP SPACE SIGNAL DECRYPTED</span>
+                <span>LEVEL_07_ARCHIVE</span>
+            </div>
+            <img src="assets/final.jpg.jpeg" alt="Final Cosmic Reveal" class="revealed-image" />
+            <button id="reset-btn" onclick="resetUniverse()">INITIALIZE QUANTUM REBOOT</button>
+        </div>
+    </div>
+
+    <audio id="ambient-audio" loop src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA=="></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
